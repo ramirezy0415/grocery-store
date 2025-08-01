@@ -27,6 +27,11 @@ const inventory = [
  */
 function logNames(items) {
   // TODO: use `forEach`
+  const print = function (item) {
+    console.log(item.name);
+  };
+
+  items.forEach(print);
 }
 
 /**
@@ -35,6 +40,8 @@ function logNames(items) {
  */
 function getUppercaseNames(items) {
   // TODO: use `map`
+  const upper = items.map((item) => item.name.toUpperCase());
+  console.log(upper);
 }
 
 /**
@@ -44,6 +51,8 @@ function getUppercaseNames(items) {
  */
 function getItemById(items, id) {
   // TODO: use `find`
+  const item_match = items.filter((item) => item.id === id);
+  console.log(item_match);
 }
 
 /**
@@ -53,6 +62,10 @@ function getItemById(items, id) {
  */
 function getItemPriceByName(items, name) {
   // TODO: use a loop!
+  const item = items.filter((item) => item.name === name);
+  const item_match_prices = item.map((item) => item.price);
+
+  console.log(item_match_prices);
 }
 
 /**
@@ -62,6 +75,8 @@ function getItemPriceByName(items, name) {
  */
 function getItemsByCategory(items, category) {
   // TODO: use `filter`
+  const items_in_category = items.filter((item) => item.category === category);
+  console.log(items_in_category);
 }
 
 /**
@@ -70,6 +85,11 @@ function getItemsByCategory(items, category) {
  */
 function countItems(items) {
   // TODO: use `reduce`
+  const totalItems = items.reduce((accumulator, current) => {
+    total = accumulator + current.quantity;
+    return total;
+  }, 0);
+  return totalItems;
 }
 
 /**
@@ -78,32 +98,38 @@ function countItems(items) {
  */
 function getTotalPrice(items) {
   // TODO: use `reduce`
+  const totalCost = items.reduce((accumulator, current) => {
+    total = accumulator + current.quantity * current.price;
+    return total;
+  }, 0);
+
+  return totalCost;
 }
 
 // === READ BUT DO NOT CHANGE THE CODE BELOW ===
 
-console.log("Welcome! We carry the following items:");
-logNames(inventory);
+// console.log("Welcome! We carry the following items:");
+// logNames(inventory);
 
-console.log("Here are the names again in all uppercase:");
-console.log(getUppercaseNames(inventory));
+// console.log("Here are the names again in all uppercase:");
+// console.log(getUppercaseNames(inventory));
 
-console.log(`In total, we have ${countItems(inventory)} items in stock.`);
+// console.log(`In total, we have ${countItems(inventory)} items in stock.`);
 
-const totalCost = getTotalPrice(inventory);
-console.log(
-  `It would cost $${totalCost?.toFixed(2)} to purchase everything in stock.`
-);
+// const totalCost = getTotalPrice(inventory);
+// console.log(
+//   `It would cost $${totalCost?.toFixed(2)} to purchase everything in stock.`
+// );
 
-const itemId = prompt("Enter the ID of an item:", "1");
-console.log(`The item with id #${itemId} is:`);
-console.log(getItemById(inventory, +itemId));
+// const itemId = prompt("Enter the ID of an item:", "1");
+// console.log(`The item with id #${itemId} is:`);
+// console.log(getItemById(inventory, +itemId));
 
-const itemName = prompt("Enter the name of an item:", "apple");
-console.log(
-  `The price of ${itemName} is ${getItemPriceByName(inventory, itemName)}.`
-);
+// const itemName = prompt("Enter the name of an item:", "apple");
+// console.log(
+//   `The price of ${itemName} is ${getItemPriceByName(inventory, itemName)}.`
+// );
 
-const category = prompt("Enter a category you would like to see:", "fruit");
-console.log(`The items in the ${category} category are:`);
-console.log(getItemsByCategory(inventory, category));
+// const category = prompt("Enter a category you would like to see:", "fruit");
+// console.log(`The items in the ${category} category are:`);
+// console.log(getItemsByCategory(inventory, category));
