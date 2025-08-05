@@ -26,11 +26,10 @@ const inventory = [
  * @param {Item[]} items - array of items
  */
 function logNames(items) {
-  // TODO: use `forEach`
+  // Print each item's name in the items list
   const print = function (item) {
     console.log(item.name);
   };
-
   items.forEach(print);
 }
 
@@ -39,9 +38,9 @@ function logNames(items) {
  * @returns {string[]} an array of item names in all uppercase
  */
 function getUppercaseNames(items) {
-  // TODO: use `map`
+  // Uppercase all item names in the item array
   const upper = items.map((item) => item.name.toUpperCase());
-  console.log(upper);
+  return upper;
 }
 
 /**
@@ -50,9 +49,11 @@ function getUppercaseNames(items) {
  * @returns {Item} - the item in `items` with the given `id`
  */
 function getItemById(items, id) {
-  // TODO: use `find`
-  const item_match = items.filter((item) => item.id === id);
-  console.log(item_match);
+  // Fin the item that contains the same id as provided
+  const item_match = items.find((item) => item.id === id);
+
+  // Once provided return the item
+  return item_match;
 }
 
 /**
@@ -61,11 +62,17 @@ function getItemById(items, id) {
  * @returns {number} the price of the item named `name` if found
  */
 function getItemPriceByName(items, name) {
-  // TODO: use a loop!
-  const item = items.filter((item) => item.name === name);
-  const item_match_prices = item.map((item) => item.price);
-
-  console.log(item_match_prices);
+  // const item = items.find((item) => item.name === name);
+  // return item.price;
+  // Iterate through all items in the items array
+  for (let i = 0; i < items.length; i++) {
+    let current_item = items[i];
+    // Once the item with the same name is found
+    if (current_item.name === name) {
+      // Return the price of that item
+      return current_item.price;
+    }
+  }
 }
 
 /**
@@ -74,9 +81,9 @@ function getItemPriceByName(items, name) {
  * @returns {Item[]} array of items that belong to the given `category`
  */
 function getItemsByCategory(items, category) {
-  // TODO: use `filter`
+  // Return all items found that match the same category
   const items_in_category = items.filter((item) => item.category === category);
-  console.log(items_in_category);
+  return items_in_category;
 }
 
 /**
@@ -84,7 +91,7 @@ function getItemsByCategory(items, category) {
  * @returns {number} the total quantity of all items
  */
 function countItems(items) {
-  // TODO: use `reduce`
+  // Sum all quantities
   const totalItems = items.reduce((accumulator, current) => {
     total = accumulator + current.quantity;
     return total;
@@ -97,7 +104,7 @@ function countItems(items) {
  * @returns {number} the cost of all given items
  */
 function getTotalPrice(items) {
-  // TODO: use `reduce`
+  // Sum the total cost of the items
   const totalCost = items.reduce((accumulator, current) => {
     total = accumulator + current.quantity * current.price;
     return total;
@@ -108,28 +115,28 @@ function getTotalPrice(items) {
 
 // === READ BUT DO NOT CHANGE THE CODE BELOW ===
 
-// console.log("Welcome! We carry the following items:");
-// logNames(inventory);
+console.log("Welcome! We carry the following items:");
+logNames(inventory);
 
-// console.log("Here are the names again in all uppercase:");
-// console.log(getUppercaseNames(inventory));
+console.log("Here are the names again in all uppercase:");
+console.log(getUppercaseNames(inventory));
 
-// console.log(`In total, we have ${countItems(inventory)} items in stock.`);
+console.log(`In total, we have ${countItems(inventory)} items in stock.`);
 
-// const totalCost = getTotalPrice(inventory);
-// console.log(
-//   `It would cost $${totalCost?.toFixed(2)} to purchase everything in stock.`
-// );
+const totalCost = getTotalPrice(inventory);
+console.log(
+  `It would cost $${totalCost?.toFixed(2)} to purchase everything in stock.`
+);
 
-// const itemId = prompt("Enter the ID of an item:", "1");
-// console.log(`The item with id #${itemId} is:`);
-// console.log(getItemById(inventory, +itemId));
+const itemId = prompt("Enter the ID of an item:", "1");
+console.log(`The item with id #${itemId} is:`);
+console.log(getItemById(inventory, +itemId));
 
-// const itemName = prompt("Enter the name of an item:", "apple");
-// console.log(
-//   `The price of ${itemName} is ${getItemPriceByName(inventory, itemName)}.`
-// );
+const itemName = prompt("Enter the name of an item:", "apple");
+console.log(
+  `The price of ${itemName} is ${getItemPriceByName(inventory, itemName)}.`
+);
 
-// const category = prompt("Enter a category you would like to see:", "fruit");
-// console.log(`The items in the ${category} category are:`);
-// console.log(getItemsByCategory(inventory, category));
+const category = prompt("Enter a category you would like to see:", "fruit");
+console.log(`The items in the ${category} category are:`);
+console.log(getItemsByCategory(inventory, category));
